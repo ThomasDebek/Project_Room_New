@@ -17,7 +17,7 @@
         </h1>
 
         <p class="mt-3 text-sm text-[#666666]">
-          Dodawaj i edytuj realizacje Project Room.
+          Dodawaj, edytuj i usuwaj realizacje Project Room.
         </p>
       </div>
 
@@ -61,16 +61,19 @@
             <% @projects.each do |project| %>
               <tr class="transition hover:bg-[#F8F7F4]">
 
+                <!-- TYTUŁ REALIZACJI -->
                 <td class="px-6 py-5">
                     <span class="font-medium text-[#252525]">
                       <%= project.title %>
                     </span>
                 </td>
 
+                <!-- KATEGORIA -->
                 <td class="px-6 py-5 text-sm text-[#666666]">
                   <%= project.category.name %>
                 </td>
 
+                <!-- STATUS PUBLIKACJI -->
                 <td class="px-6 py-5">
                   <% if project.published? %>
                       <span class="inline-flex rounded-full bg-green-100 px-3 py-1 text-xs font-semibold text-green-800">
@@ -83,10 +86,29 @@
                   <% end %>
                 </td>
 
-                <td class="px-6 py-5 text-right">
-                  <%= link_to "Edytuj",
-                              edit_admin_project_path(project),
-                              class: "text-sm font-semibold text-[#A77549] transition hover:text-[#202326]" %>
+                <!-- AKCJE -->
+                <td class="px-6 py-5">
+
+                  <div class="flex items-center justify-end gap-5">
+
+                    <!-- EDYTUJ -->
+                    <%= link_to "Edytuj",
+                                edit_admin_project_path(project),
+                                class: "text-sm font-semibold text-[#A77549] transition hover:text-[#202326]" %>
+
+                    <!-- USUŃ -->
+                    <%= button_to "Usuń",
+                                  admin_project_path(project),
+                                  method: :delete,
+                                  form: {
+                                    data: {
+                                      turbo_confirm: "Czy na pewno chcesz usunąć tę realizację? Tej operacji nie można cofnąć."
+                                    }
+                                  },
+                                  class: "cursor-pointer text-sm font-semibold text-red-600 transition hover:text-red-800" %>
+
+                  </div>
+
                 </td>
 
               </tr>

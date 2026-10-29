@@ -1,0 +1,96 @@
+<%= form_with model: [:admin, @project], class: "space-y-8" do |form| %>
+
+  <!-- BŁĘDY WALIDACJI -->
+  <% if @project.errors.any? %>
+    <div class="rounded-xl border border-red-200 bg-red-50 p-5">
+
+      <h2 class="font-semibold text-red-800">
+        Nie udało się zapisać realizacji:
+      </h2>
+
+      <ul class="mt-3 list-disc pl-5 text-sm text-red-700">
+        <% @project.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+
+    </div>
+  <% end %>
+
+  <!-- TYTUŁ -->
+  <div>
+    <%= form.label :title, "Tytuł realizacji",
+                   class: "mb-2 block text-sm font-semibold text-[#252525]" %>
+
+    <%= form.text_field :title,
+                        required: true,
+                        placeholder: "Np. Nowoczesna łazienka w Warszawie",
+                        class: "w-full rounded-lg border border-[#D8D3CB] bg-white px-4 py-3 text-[#252525] outline-none focus:border-[#C99563]" %>
+  </div>
+
+  <!-- OPIS -->
+  <div>
+    <%= form.label :description, "Opis realizacji",
+                   class: "mb-2 block text-sm font-semibold text-[#252525]" %>
+
+    <%= form.text_area :description,
+                       rows: 6,
+                       required: true,
+                       placeholder: "Opisz wykonaną realizację...",
+                       class: "w-full rounded-lg border border-[#D8D3CB] bg-white px-4 py-3 text-[#252525] outline-none focus:border-[#C99563]" %>
+  </div>
+
+  <!-- KATEGORIA -->
+  <div>
+    <%= form.label :category_id, "Kategoria",
+                   class: "mb-2 block text-sm font-semibold text-[#252525]" %>
+
+    <%= form.collection_select :category_id,
+                               Category.order(:name),
+                               :id,
+                               :name,
+                               { prompt: "Wybierz kategorię" },
+                               { required: true,
+                                 class: "w-full rounded-lg border border-[#D8D3CB] bg-white px-4 py-3 text-[#252525] outline-none focus:border-[#C99563]" } %>
+  </div>
+
+  <!-- ZDJĘCIA -->
+  <div>
+    <%= form.label :images, "Zdjęcia realizacji",
+                   class: "mb-2 block text-sm font-semibold text-[#252525]" %>
+
+    <%= form.file_field :images,
+                        multiple: true,
+                        accept: "image/*",
+                        class: "block w-full rounded-lg border border-[#D8D3CB] bg-white px-4 py-3 text-sm text-[#252525]" %>
+
+    <p class="mt-2 text-xs text-[#777777]">
+      Możesz zaznaczyć kilka zdjęć jednocześnie.
+    </p>
+  </div>
+
+  <!-- PUBLIKACJA -->
+  <div class="flex items-center gap-3 rounded-lg bg-[#F8F7F4] p-4">
+
+    <%= form.check_box :published,
+                       class: "h-5 w-5 rounded border-[#D8D3CB] text-[#C99563]" %>
+
+    <%= form.label :published,
+                   "Opublikuj realizację na stronie",
+                   class: "text-sm font-medium text-[#252525]" %>
+
+  </div>
+
+  <!-- PRZYCISKI -->
+  <div class="flex flex-wrap items-center gap-4 border-t border-[#E4DED5] pt-8">
+
+    <%= form.submit "Zapisz realizację",
+                    class: "cursor-pointer rounded-lg bg-[#C99563] px-7 py-3 text-sm font-semibold text-[#202326] transition hover:bg-[#E0AD7C]" %>
+
+    <%= link_to "Anuluj",
+                admin_projects_path,
+                class: "rounded-lg border border-[#D8D3CB] px-7 py-3 text-sm font-medium text-[#666666] transition hover:bg-[#F8F7F4]" %>
+
+  </div>
+
+<% end %>

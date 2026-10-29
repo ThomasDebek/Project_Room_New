@@ -21,6 +21,7 @@
         </p>
       </div>
 
+      <!-- DODAWANIE REALIZACJI -->
       <%= link_to new_admin_project_path,
                   class: "inline-flex items-center justify-center rounded-lg bg-[#C99563] px-6 py-3 text-sm font-semibold text-[#202326] transition hover:bg-[#E0AD7C]" do %>
         + Dodaj realizację
@@ -34,10 +35,18 @@
       <% if @projects.any? %>
 
         <div class="overflow-x-auto">
+
           <table class="w-full text-left">
 
+            <!-- NAGŁÓWKI TABELI -->
             <thead class="border-b border-[#E4DED5] bg-[#F8F7F4]">
+
             <tr>
+
+              <th class="px-6 py-4 text-xs font-semibold uppercase tracking-wider text-[#666666]">
+                Zdjęcie
+              </th>
+
               <th class="px-6 py-4 text-xs font-semibold uppercase tracking-wider text-[#666666]">
                 Realizacja
               </th>
@@ -53,37 +62,87 @@
               <th class="px-6 py-4 text-right text-xs font-semibold uppercase tracking-wider text-[#666666]">
                 Akcje
               </th>
+
             </tr>
+
             </thead>
 
+            <!-- REALIZACJE -->
             <tbody class="divide-y divide-[#EEE9E1]">
 
             <% @projects.each do |project| %>
+
               <tr class="transition hover:bg-[#F8F7F4]">
+
+                <!-- ZDJĘCIE REALIZACJI -->
+                <td class="px-6 py-4">
+
+                  <% if project.images.attached? %>
+
+                    <%= image_tag project.images.first,
+                                  alt: project.title,
+                                  class: "h-20 w-28 rounded-lg object-cover",
+                                  loading: "lazy" %>
+
+                  <% else %>
+
+                    <!-- IKONA APARATU -->
+                    <div class="flex h-20 w-28 items-center justify-center rounded-lg bg-[#EEE9E1]">
+
+                      <svg xmlns="http://www.w3.org/2000/svg"
+                           fill="none"
+                           viewBox="0 0 24 24"
+                           stroke-width="1.5"
+                           stroke="currentColor"
+                           class="h-8 w-8 text-[#A77549]">
+
+                        <path stroke-linecap="round"
+                              stroke-linejoin="round"
+                              d="M14.25 6.75h-4.5l-1.5 2.25H5.25A2.25 2.25 0 0 0 3 11.25v7.5A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75v-7.5A2.25 2.25 0 0 0 18.75 9h-3l-1.5-2.25Z" />
+
+                        <circle cx="12" cy="14.25" r="3" />
+
+                      </svg>
+
+                    </div>
+
+                  <% end %>
+
+                </td>
 
                 <!-- TYTUŁ REALIZACJI -->
                 <td class="px-6 py-5">
+
                     <span class="font-medium text-[#252525]">
                       <%= project.title %>
                     </span>
+
                 </td>
 
                 <!-- KATEGORIA -->
                 <td class="px-6 py-5 text-sm text-[#666666]">
+
                   <%= project.category.name %>
+
                 </td>
 
                 <!-- STATUS PUBLIKACJI -->
                 <td class="px-6 py-5">
+
                   <% if project.published? %>
+
                       <span class="inline-flex rounded-full bg-green-100 px-3 py-1 text-xs font-semibold text-green-800">
                         Opublikowana
                       </span>
+
                   <% else %>
+
                       <span class="inline-flex rounded-full bg-amber-100 px-3 py-1 text-xs font-semibold text-amber-800">
                         Szkic
                       </span>
+
                   <% end %>
+
                 </td>
 
                 <!-- AKCJE -->
@@ -112,11 +171,13 @@
                 </td>
 
               </tr>
+
             <% end %>
 
             </tbody>
 
           </table>
+
         </div>
 
       <% else %>
@@ -144,9 +205,11 @@
 
     <!-- POWRÓT -->
     <div class="mt-8">
+
       <%= link_to "← Powrót do panelu",
                   admin_root_path,
                   class: "text-sm font-medium text-[#666666] transition hover:text-[#C99563]" %>
+
     </div>
 
   </div>

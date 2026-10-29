@@ -3,7 +3,10 @@ class Admin::ProjectsController < ApplicationController
   before_action :set_project, only: [:edit, :update, :destroy, :destroy_image]
 
   def index
-    @projects = Project.includes(:category).order(created_at: :desc)
+    @projects = Project
+                  .includes(:category)
+                  .with_attached_images
+                  .order(created_at: :desc)
   end
 
   def new

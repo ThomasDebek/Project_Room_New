@@ -1,7 +1,59 @@
+<!-- AKTUALNE ZDJĘCIA -->
+<% if @project.persisted? && @project.images.attached? %>
+
+  <div class="mb-10">
+
+    <h2 class="mb-4 text-lg font-semibold text-[#252525]">
+      Aktualne zdjęcia (<%= @project.images.count %>)
+    </h2>
+
+    <p class="mb-5 text-sm text-[#666666]">
+      Możesz usuwać pojedyncze zdjęcia bez usuwania całej realizacji.
+    </p>
+
+    <div class="grid grid-cols-2 gap-4 sm:grid-cols-3">
+
+      <% @project.images.each do |image| %>
+
+        <div class="overflow-hidden rounded-xl border border-[#E4DED5] bg-white shadow-sm">
+
+          <!-- MINIATURKA -->
+          <%= image_tag image.variant(resize_to_limit: [400, 300]),
+                        class: "h-40 w-full object-cover",
+                        loading: "lazy" %>
+
+          <!-- USUWANIE ZDJĘCIA -->
+          <div class="p-3">
+
+            <%= button_to "Usuń zdjęcie",
+                          image_admin_project_path(@project, image_id: image.id),
+                          method: :delete,
+                          form: {
+                            data: {
+                              turbo_confirm: "Czy na pewno chcesz usunąć to zdjęcie?"
+                            }
+                          },
+                          class: "w-full cursor-pointer rounded-lg bg-red-50 px-3 py-2 text-xs font-semibold text-red-600 transition hover:bg-red-100" %>
+
+          </div>
+
+        </div>
+
+      <% end %>
+
+    </div>
+
+  </div>
+
+<% end %>
+
+
+<!-- FORMULARZ REALIZACJI -->
 <%= form_with model: [:admin, @project], class: "space-y-8" do |form| %>
 
   <!-- BŁĘDY WALIDACJI -->
   <% if @project.errors.any? %>
+
     <div class="rounded-xl border border-red-200 bg-red-50 p-5">
 
       <h2 class="font-semibold text-red-800">
@@ -9,28 +61,38 @@
       </h2>
 
       <ul class="mt-3 list-disc pl-5 text-sm text-red-700">
+
         <% @project.errors.full_messages.each do |message| %>
           <li><%= message %></li>
         <% end %>
+
       </ul>
 
     </div>
+
   <% end %>
+
 
   <!-- TYTUŁ -->
   <div>
-    <%= form.label :title, "Tytuł realizacji",
+
+    <%= form.label :title,
+                   "Tytuł realizacji",
                    class: "mb-2 block text-sm font-semibold text-[#252525]" %>
 
     <%= form.text_field :title,
                         required: true,
                         placeholder: "Np. Nowoczesna łazienka w Warszawie",
                         class: "w-full rounded-lg border border-[#D8D3CB] bg-white px-4 py-3 text-[#252525] outline-none focus:border-[#C99563]" %>
+
   </div>
+
 
   <!-- OPIS -->
   <div>
-    <%= form.label :description, "Opis realizacji",
+
+    <%= form.label :description,
+                   "Opis realizacji",
                    class: "mb-2 block text-sm font-semibold text-[#252525]" %>
 
     <%= form.text_area :description,
@@ -38,11 +100,15 @@
                        required: true,
                        placeholder: "Opisz wykonaną realizację...",
                        class: "w-full rounded-lg border border-[#D8D3CB] bg-white px-4 py-3 text-[#252525] outline-none focus:border-[#C99563]" %>
+
   </div>
+
 
   <!-- KATEGORIA -->
   <div>
-    <%= form.label :category_id, "Kategoria",
+
+    <%= form.label :category_id,
+                   "Kategoria",
                    class: "mb-2 block text-sm font-semibold text-[#252525]" %>
 
     <%= form.collection_select :category_id,
@@ -50,13 +116,19 @@
                                :id,
                                :name,
                                { prompt: "Wybierz kategorię" },
-                               { required: true,
-                                 class: "w-full rounded-lg border border-[#D8D3CB] bg-white px-4 py-3 text-[#252525] outline-none focus:border-[#C99563]" } %>
+                               {
+                                 required: true,
+                                 class: "w-full rounded-lg border border-[#D8D3CB] bg-white px-4 py-3 text-[#252525] outline-none focus:border-[#C99563]"
+                               } %>
+
   </div>
 
-  <!-- ZDJĘCIA -->
+
+  <!-- DODAWANIE ZDJĘĆ -->
   <div>
-    <%= form.label :images, "Zdjęcia realizacji",
+
+    <%= form.label :images,
+                   "Dodaj zdjęcia realizacji",
                    class: "mb-2 block text-sm font-semibold text-[#252525]" %>
 
     <%= form.file_field :images,
@@ -66,8 +138,11 @@
 
     <p class="mt-2 text-xs text-[#777777]">
       Możesz zaznaczyć kilka zdjęć jednocześnie.
+      Podczas edycji nowe zdjęcia zostaną dodane do istniejących.
     </p>
+
   </div>
+
 
   <!-- PUBLIKACJA -->
   <div class="flex items-center gap-3 rounded-lg bg-[#F8F7F4] p-4">
@@ -80,6 +155,7 @@
                    class: "text-sm font-medium text-[#252525]" %>
 
   </div>
+
 
   <!-- PRZYCISKI -->
   <div class="flex flex-wrap items-center gap-4 border-t border-[#E4DED5] pt-8">

@@ -4,31 +4,108 @@
 
   <div class="mx-auto max-w-7xl">
 
-    <p class="mb-4 text-xs font-semibold uppercase tracking-[0.25em] text-[#A77549]">
-      Project Room
-    </p>
+    <!-- NAGŁÓWEK -->
+    <div class="mb-12">
 
-    <h1 class="text-3xl font-semibold text-[#252525] sm:text-4xl">
-      Panel administratora
-    </h1>
-
-    <p class="mt-4 text-[#666666]">
-      Zarządzanie realizacjami i galerią zdjęć.
-    </p>
-
-    <div class="mt-12 rounded-2xl border border-[#E4DED5] bg-white p-8 shadow-sm">
-
-      <h2 class="text-xl font-semibold text-[#252525]">
-        Realizacje
-      </h2>
-
-      <p class="mt-3 text-sm leading-7 text-[#666666]">
-        Tutaj będziesz dodawać, edytować i publikować realizacje.
+      <p class="mb-4 text-xs font-semibold uppercase tracking-[0.25em] text-[#A77549]">
+        PROJECT ROOM
       </p>
 
-      <p class="mt-6 text-sm font-medium text-[#A77549]">
-        Formularz dodawania realizacji przygotujemy w następnym kroku.
+      <h1 class="text-3xl font-semibold text-[#252525] sm:text-4xl">
+        Panel administratora
+      </h1>
+
+      <p class="mt-4 text-[#666666]">
+        Zarządzaj realizacjami i galerią zdjęć Project Room.
       </p>
+
+    </div>
+
+    <!-- KARTY PANELU -->
+    <div class="grid gap-6 md:grid-cols-2">
+
+      <!-- ZARZĄDZANIE REALIZACJAMI -->
+      <div class="rounded-2xl border border-[#E4DED5] bg-white p-8 shadow-sm">
+
+        <div class="mb-6 flex h-14 w-14 items-center justify-center rounded-xl bg-[#EEE9E1]">
+
+          <svg xmlns="http://www.w3.org/2000/svg"
+               fill="none"
+               viewBox="0 0 24 24"
+               stroke-width="1.5"
+               stroke="currentColor"
+               class="h-7 w-7 text-[#A77549]">
+
+            <path stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M3 3h18v18H3V3Zm4 13 3-3 2 2 4-5 3 6H7Z" />
+
+          </svg>
+
+        </div>
+
+        <h2 class="text-xl font-semibold text-[#252525]">
+          Zarządzanie realizacjami
+        </h2>
+
+        <p class="mt-3 text-sm leading-7 text-[#666666]">
+          Przeglądaj, edytuj, publikuj i usuwaj swoje realizacje.
+        </p>
+
+        <%= link_to admin_projects_path,
+                    class: "mt-8 inline-flex items-center justify-center rounded-lg bg-[#202326] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#393D40]" do %>
+
+          Zarządzaj realizacjami →
+
+        <% end %>
+
+      </div>
+
+      <!-- DODAWANIE REALIZACJI -->
+      <div class="rounded-2xl border border-[#E4DED5] bg-white p-8 shadow-sm">
+
+        <div class="mb-6 flex h-14 w-14 items-center justify-center rounded-xl bg-[#EEE9E1]">
+
+          <svg xmlns="http://www.w3.org/2000/svg"
+               fill="none"
+               viewBox="0 0 24 24"
+               stroke-width="1.5"
+               stroke="currentColor"
+               class="h-7 w-7 text-[#A77549]">
+
+            <path stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M12 4v16m8-8H4" />
+
+          </svg>
+
+        </div>
+
+        <h2 class="text-xl font-semibold text-[#252525]">
+          Dodaj nową realizację
+        </h2>
+
+        <p class="mt-3 text-sm leading-7 text-[#666666]">
+          Dodaj zdjęcia, opis, wybierz kategorię i opublikuj realizację.
+        </p>
+
+        <%= link_to new_admin_project_path,
+                    class: "mt-8 inline-flex items-center justify-center rounded-lg bg-[#C99563] px-6 py-3 text-sm font-semibold text-[#202326] transition hover:bg-[#E0AD7C]" do %>
+
+          + Dodaj realizację
+
+        <% end %>
+
+      </div>
+
+    </div>
+
+    <!-- POWRÓT NA STRONĘ -->
+    <div class="mt-10">
+
+      <%= link_to "← Powrót na stronę główną",
+                  root_path,
+                  class: "text-sm font-medium text-[#666666] transition hover:text-[#C99563]" %>
 
     </div>
 

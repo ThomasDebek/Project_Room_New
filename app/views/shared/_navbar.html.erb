@@ -29,6 +29,13 @@
                   "#{root_path}#kontakt",
                   class: "text-sm text-gray-300 transition hover:text-white" %>
 
+      <% if admin_signed_in? %>
+        <%= button_to "Wyloguj się",
+                      destroy_admin_session_path,
+                      method: :delete,
+                      class: "cursor-pointer rounded-lg bg-[#C99563] px-5 py-2.5 text-sm font-semibold text-[#202326] transition hover:bg-[#E0AD7C]" %>
+      <% end %>
+
     </div>
 
     <!-- MOBILE MENU -->

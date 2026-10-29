@@ -1,0 +1,132 @@
+<% content_for :title, "Zarządzanie realizacjami | Project Room" %>
+
+<section class="min-h-screen bg-[#F8F7F4] px-5 py-12 sm:py-16">
+
+  <div class="mx-auto max-w-7xl">
+
+    <!-- NAGŁÓWEK -->
+    <div class="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+
+      <div>
+        <p class="mb-3 text-xs font-semibold uppercase tracking-[0.25em] text-[#A77549]">
+          Panel administratora
+        </p>
+
+        <h1 class="text-3xl font-semibold text-[#252525] sm:text-4xl">
+          Zarządzanie realizacjami
+        </h1>
+
+        <p class="mt-3 text-sm text-[#666666]">
+          Dodawaj i edytuj realizacje Project Room.
+        </p>
+      </div>
+
+      <%= link_to new_admin_project_path,
+                  class: "inline-flex items-center justify-center rounded-lg bg-[#C99563] px-6 py-3 text-sm font-semibold text-[#202326] transition hover:bg-[#E0AD7C]" do %>
+        + Dodaj realizację
+      <% end %>
+
+    </div>
+
+    <!-- LISTA REALIZACJI -->
+    <div class="mt-10 overflow-hidden rounded-2xl border border-[#E4DED5] bg-white shadow-sm">
+
+      <% if @projects.any? %>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left">
+
+            <thead class="border-b border-[#E4DED5] bg-[#F8F7F4]">
+            <tr>
+              <th class="px-6 py-4 text-xs font-semibold uppercase tracking-wider text-[#666666]">
+                Realizacja
+              </th>
+
+              <th class="px-6 py-4 text-xs font-semibold uppercase tracking-wider text-[#666666]">
+                Kategoria
+              </th>
+
+              <th class="px-6 py-4 text-xs font-semibold uppercase tracking-wider text-[#666666]">
+                Status
+              </th>
+
+              <th class="px-6 py-4 text-right text-xs font-semibold uppercase tracking-wider text-[#666666]">
+                Akcje
+              </th>
+            </tr>
+            </thead>
+
+            <tbody class="divide-y divide-[#EEE9E1]">
+
+            <% @projects.each do |project| %>
+              <tr class="transition hover:bg-[#F8F7F4]">
+
+                <td class="px-6 py-5">
+                    <span class="font-medium text-[#252525]">
+                      <%= project.title %>
+                    </span>
+                </td>
+
+                <td class="px-6 py-5 text-sm text-[#666666]">
+                  <%= project.category.name %>
+                </td>
+
+                <td class="px-6 py-5">
+                  <% if project.published? %>
+                      <span class="inline-flex rounded-full bg-green-100 px-3 py-1 text-xs font-semibold text-green-800">
+                        Opublikowana
+                      </span>
+                  <% else %>
+                      <span class="inline-flex rounded-full bg-amber-100 px-3 py-1 text-xs font-semibold text-amber-800">
+                        Szkic
+                      </span>
+                  <% end %>
+                </td>
+
+                <td class="px-6 py-5 text-right">
+                  <%= link_to "Edytuj",
+                              edit_admin_project_path(project),
+                              class: "text-sm font-semibold text-[#A77549] transition hover:text-[#202326]" %>
+                </td>
+
+              </tr>
+            <% end %>
+
+            </tbody>
+
+          </table>
+        </div>
+
+      <% else %>
+
+        <!-- BRAK REALIZACJI -->
+        <div class="px-6 py-20 text-center">
+
+          <h2 class="text-xl font-semibold text-[#252525]">
+            Nie masz jeszcze żadnych realizacji
+          </h2>
+
+          <p class="mt-3 text-sm text-[#666666]">
+            Dodaj pierwszą realizację, aby rozpocząć tworzenie galerii.
+          </p>
+
+          <%= link_to "Dodaj pierwszą realizację",
+                      new_admin_project_path,
+                      class: "mt-8 inline-flex rounded-lg bg-[#C99563] px-6 py-3 text-sm font-semibold text-[#202326] transition hover:bg-[#E0AD7C]" %>
+
+        </div>
+
+      <% end %>
+
+    </div>
+
+    <!-- POWRÓT -->
+    <div class="mt-8">
+      <%= link_to "← Powrót do panelu",
+                  admin_root_path,
+                  class: "text-sm font-medium text-[#666666] transition hover:text-[#C99563]" %>
+    </div>
+
+  </div>
+
+</section>

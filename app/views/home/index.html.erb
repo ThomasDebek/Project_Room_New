@@ -1,95 +1,6 @@
 <% content_for :title, "Project Room | Remonty i wykończenia wnętrz" %>
 
 <!-- ====================================== -->
-<!-- NAVBAR -->
-<!-- ====================================== -->
-
-<header class="relative z-50 bg-[#202326]">
-
-  <nav class="mx-auto flex h-20 max-w-7xl items-center justify-between px-5 lg:px-8">
-
-    <!-- LOGO -->
-    <%= link_to root_path,
-                class: "text-xl font-bold tracking-wide text-white sm:text-2xl" do %>
-
-      PROJECT <span class="font-normal text-[#C99563]">ROOM</span>
-
-    <% end %>
-
-    <!-- DESKTOP MENU -->
-    <div class="hidden items-center gap-9 md:flex">
-
-      <%= link_to "Strona główna",
-                  root_path,
-                  class: "text-sm font-medium text-[#C99563] transition hover:text-white" %>
-
-      <%= link_to "Realizacje",
-                  projects_path,
-                  class: "text-sm text-gray-300 transition hover:text-white" %>
-
-      <a href="#uslugi"
-         class="text-sm text-gray-300 transition hover:text-white">
-        Usługi
-      </a>
-
-      <a href="#kontakt"
-         class="text-sm text-gray-300 transition hover:text-white">
-        Kontakt
-      </a>
-
-    </div>
-
-    <!-- MOBILE MENU -->
-    <details class="group relative md:hidden">
-
-      <summary class="flex min-h-11 min-w-11 cursor-pointer list-none items-center justify-center rounded-lg border border-white/20 text-white">
-
-        <svg xmlns="http://www.w3.org/2000/svg"
-             fill="none"
-             viewBox="0 0 24 24"
-             stroke-width="1.8"
-             stroke="currentColor"
-             class="h-6 w-6">
-
-          <path stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M4 6h16M4 12h16M4 18h16" />
-
-        </svg>
-
-      </summary>
-
-      <div class="absolute right-0 top-full mt-3 w-64 rounded-xl border border-white/10 bg-[#252729] p-5 shadow-2xl">
-
-        <div class="flex flex-col gap-5">
-
-          <%= link_to "Strona główna",
-                      root_path,
-                      class: "text-sm text-[#C99563]" %>
-
-          <a href="#realizacje" class="text-sm text-gray-200">
-            Realizacje
-          </a>
-
-          <a href="#uslugi" class="text-sm text-gray-200">
-            Usługi
-          </a>
-
-          <a href="#kontakt" class="text-sm text-gray-200">
-            Kontakt
-          </a>
-
-        </div>
-
-      </div>
-
-    </details>
-
-  </nav>
-
-</header>
-
-<!-- ====================================== -->
 <!-- HERO -->
 <!-- ====================================== -->
 
@@ -143,67 +54,20 @@
 
       <div class="mt-10">
 
-        <a href="#realizacje"
-           class="inline-flex min-h-12 items-center justify-center rounded-lg bg-[#C99563] px-8 py-4 text-sm font-semibold text-[#202326] shadow-lg transition duration-300 hover:bg-[#E0AD7C]">
+        <%= link_to projects_path,
+                    class: "inline-flex min-h-12 items-center justify-center rounded-lg bg-[#C99563] px-8 py-4 text-sm font-semibold text-[#202326] shadow-lg transition duration-300 hover:bg-[#E0AD7C]" do %>
 
           Zobacz realizacje
 
           <span class="ml-3 text-lg">→</span>
 
-        </a>
+        <% end %>
 
       </div>
 
     </div>
 
   </div>
-
-</section>
-
-<!-- CONTENT -->
-<div class="relative mx-auto w-full max-w-7xl px-5 py-24 lg:px-8">
-
-  <div class="max-w-2xl">
-
-    <p class="mb-6 text-xs font-semibold uppercase tracking-[0.25em] text-[#A77549] sm:text-sm">
-      Remonty i wykończenia wnętrz
-    </p>
-
-    <h1 class="text-5xl font-semibold leading-[1.12] tracking-tight text-[#252525] sm:text-6xl lg:text-7xl">
-
-      Twoje wnętrze.
-
-      <span class="mt-2 block text-[#B98252]">
-          Nasza pasja.
-        </span>
-
-    </h1>
-
-    <p class="mt-8 max-w-lg text-base leading-8 text-[#4B4B4B] sm:text-lg">
-
-      Kompleksowe remonty i wykończenia mieszkań.
-
-      Nowoczesne rozwiązania, funkcjonalne wnętrza
-      i dbałość o każdy detal.
-
-    </p>
-
-    <div class="mt-10">
-
-      <a href="#realizacje"
-         class="inline-flex min-h-12 items-center justify-center rounded-lg bg-[#C99563] px-8 py-4 text-sm font-semibold text-[#202326] shadow-lg shadow-black/10 transition duration-300 hover:bg-[#D8B48C]">
-
-        Zobacz realizacje
-
-        <span class="ml-3 text-lg">→</span>
-
-      </a>
-
-    </div>
-
-  </div>
-
-</div>
 
 </section>
 
@@ -242,9 +106,12 @@
     <!-- GRID -->
     <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
 
+      <!-- ====================================== -->
       <!-- LAZIENKI -->
-      <a href="#kontakt"
-         class="group relative block h-[360px] overflow-hidden rounded-2xl shadow-lg shadow-black/10 sm:h-[420px]">
+      <!-- ====================================== -->
+
+      <%= link_to projects_path(category: "lazienki"),
+                  class: "group relative block h-[360px] overflow-hidden rounded-2xl shadow-lg shadow-black/10 sm:h-[420px]" do %>
 
         <img
           src="https://images.unsplash.com/photo-1620626011761-996317b8d101?auto=format&fit=crop&w=1000&q=85"
@@ -267,12 +134,15 @@
 
         </div>
 
-      </a>
+      <% end %>
 
 
+      <!-- ====================================== -->
       <!-- KUCHNIE -->
-      <a href="#kontakt"
-         class="group relative block h-[360px] overflow-hidden rounded-2xl shadow-lg shadow-black/10 sm:h-[420px]">
+      <!-- ====================================== -->
+
+      <%= link_to projects_path(category: "kuchnie"),
+                  class: "group relative block h-[360px] overflow-hidden rounded-2xl shadow-lg shadow-black/10 sm:h-[420px]" do %>
 
         <img
           src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1000&q=85"
@@ -295,12 +165,15 @@
 
         </div>
 
-      </a>
+      <% end %>
 
 
+      <!-- ====================================== -->
       <!-- MIESZKANIA -->
-      <a href="#kontakt"
-         class="group relative block h-[360px] overflow-hidden rounded-2xl shadow-lg shadow-black/10 sm:h-[420px]">
+      <!-- ====================================== -->
+
+      <%= link_to projects_path(category: "mieszkania"),
+                  class: "group relative block h-[360px] overflow-hidden rounded-2xl shadow-lg shadow-black/10 sm:h-[420px]" do %>
 
         <img
           src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1000&q=85"
@@ -323,7 +196,7 @@
 
         </div>
 
-      </a>
+      <% end %>
 
     </div>
 
@@ -340,6 +213,7 @@
 
   <div class="mx-auto max-w-7xl px-5 lg:px-8">
 
+    <!-- HEADER -->
     <div class="mb-12">
 
       <p class="mb-4 text-xs font-semibold uppercase tracking-[0.25em] text-[#A77549]">
@@ -352,6 +226,7 @@
 
     </div>
 
+    <!-- SERVICES GRID -->
     <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
 
       <% [
@@ -392,6 +267,7 @@
 
   <div class="mx-auto max-w-7xl px-5 lg:px-8">
 
+    <!-- HEADER -->
     <div class="mb-12">
 
       <p class="mb-4 text-xs font-semibold uppercase tracking-[0.25em] text-[#C99563]">
@@ -409,6 +285,7 @@
 
     </div>
 
+    <!-- CONTACT GRID -->
     <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
 
       <!-- PHONE -->
@@ -420,11 +297,13 @@
 
         <a href="tel:+48514756878"
            class="break-words text-2xl font-semibold transition hover:text-[#C99563] sm:text-3xl">
+
           +48 514 756 878
+
         </a>
 
         <p class="mt-4 text-sm text-gray-400">
-          Klikńrealinij numer, aby zadzwonić.
+          Kliknij numer, aby zadzwonić.
         </p>
 
       </div>
@@ -439,7 +318,9 @@
 
         <a href="mailto:projectroomwaw@gmail.com"
            class="break-all text-xl font-semibold transition hover:text-[#C99563] sm:text-2xl">
+
           projectroomwaw@gmail.com
+
         </a>
 
         <p class="mt-4 text-sm text-gray-400">
@@ -463,12 +344,15 @@
 
   <div class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-6 px-5 text-center md:flex-row lg:px-8">
 
-    <%= link_to root_path, class: "text-xl font-bold tracking-wide" do %>
+    <!-- LOGO -->
+    <%= link_to root_path,
+                class: "text-xl font-bold tracking-wide" do %>
 
       PROJECT <span class="font-normal text-[#C99563]">ROOM</span>
 
     <% end %>
 
+    <!-- COPYRIGHT -->
     <p class="text-sm text-gray-400">
       © <%= Date.current.year %> Project Room. Wszelkie prawa zastrzeżone.
     </p>

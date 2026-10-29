@@ -11,36 +11,53 @@
     <% end %>
 
     <!-- DESKTOP MENU -->
-    <div class="hidden items-center gap-9 md:flex">
+    <div class="hidden items-center gap-7 md:flex">
 
+      <!-- STRONA GŁÓWNA -->
       <%= link_to "Strona główna",
                   root_path,
                   class: "text-sm transition hover:text-white #{current_page?(root_path) ? 'font-medium text-[#C99563]' : 'text-gray-300'}" %>
 
+      <!-- REALIZACJE -->
       <%= link_to "Realizacje",
                   projects_path,
                   class: "text-sm transition hover:text-white #{request.path.start_with?(projects_path) ? 'font-medium text-[#C99563]' : 'text-gray-300'}" %>
 
+      <!-- USŁUGI -->
       <%= link_to "Usługi",
                   "#{root_path}#uslugi",
                   class: "text-sm text-gray-300 transition hover:text-white" %>
 
+      <!-- KONTAKT -->
       <%= link_to "Kontakt",
                   "#{root_path}#kontakt",
                   class: "text-sm text-gray-300 transition hover:text-white" %>
 
+      <!-- PANEL ADMINISTRATORA -->
       <% if admin_signed_in? %>
+
+        <%= link_to "Panel admina",
+                    admin_root_path,
+                    class: "text-sm font-medium transition hover:text-white #{request.path == admin_root_path ? 'text-white' : 'text-[#C99563]'}" %>
+
+        <!-- WYLOGOWANIE -->
         <%= button_to "Wyloguj się",
                       destroy_admin_session_path,
                       method: :delete,
                       class: "cursor-pointer rounded-lg bg-[#C99563] px-5 py-2.5 text-sm font-semibold text-[#202326] transition hover:bg-[#E0AD7C]" %>
+
       <% end %>
 
     </div>
 
+
+    <!-- ====================================== -->
     <!-- MOBILE MENU -->
+    <!-- ====================================== -->
+
     <details class="group relative md:hidden">
 
+      <!-- HAMBURGER -->
       <summary class="flex min-h-11 min-w-11 cursor-pointer list-none items-center justify-center rounded-lg border border-white/20 text-white">
 
         <svg xmlns="http://www.w3.org/2000/svg"
@@ -58,25 +75,50 @@
 
       </summary>
 
+      <!-- ROZWIJANE MENU -->
       <div class="absolute right-0 top-full mt-3 w-64 rounded-xl border border-white/10 bg-[#252729] p-5 shadow-2xl">
 
         <div class="flex flex-col gap-5">
 
+          <!-- STRONA GŁÓWNA -->
           <%= link_to "Strona główna",
                       root_path,
-                      class: "text-sm text-gray-200" %>
+                      class: "text-sm transition hover:text-[#C99563] #{current_page?(root_path) ? 'text-[#C99563]' : 'text-gray-200'}" %>
 
+          <!-- REALIZACJE -->
           <%= link_to "Realizacje",
                       projects_path,
-                      class: "text-sm text-gray-200" %>
+                      class: "text-sm transition hover:text-[#C99563] #{request.path.start_with?(projects_path) ? 'text-[#C99563]' : 'text-gray-200'}" %>
 
+          <!-- USŁUGI -->
           <%= link_to "Usługi",
                       "#{root_path}#uslugi",
-                      class: "text-sm text-gray-200" %>
+                      class: "text-sm text-gray-200 transition hover:text-[#C99563]" %>
 
+          <!-- KONTAKT -->
           <%= link_to "Kontakt",
                       "#{root_path}#kontakt",
-                      class: "text-sm text-gray-200" %>
+                      class: "text-sm text-gray-200 transition hover:text-[#C99563]" %>
+
+          <!-- ADMIN MOBILE -->
+          <% if admin_signed_in? %>
+
+            <div class="border-t border-white/10 pt-5">
+
+              <!-- PANEL ADMINA -->
+              <%= link_to "Panel admina",
+                          admin_root_path,
+                          class: "mb-5 block text-sm font-medium text-[#C99563] transition hover:text-white" %>
+
+              <!-- WYLOGOWANIE -->
+              <%= button_to "Wyloguj się",
+                            destroy_admin_session_path,
+                            method: :delete,
+                            class: "w-full cursor-pointer rounded-lg bg-[#C99563] px-4 py-3 text-center text-sm font-semibold text-[#202326] transition hover:bg-[#E0AD7C]" %>
+
+            </div>
+
+          <% end %>
 
         </div>
 

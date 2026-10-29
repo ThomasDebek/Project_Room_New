@@ -10,5 +10,10 @@ Rails.application.routes.draw do
                sign_out: "logout"
              }
 
+  namespace :admin do
+    root "dashboard#index"
+  end
+
+
   resources :projects, path: "realizacje", only: [:index, :show]
 end

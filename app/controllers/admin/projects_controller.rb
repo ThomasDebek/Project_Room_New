@@ -1,6 +1,6 @@
 class Admin::ProjectsController < ApplicationController
   before_action :authenticate_admin!
-  before_action :set_project, only: [:edit, :update, :destroy]
+  before_action :set_project, only: [:edit, :update, :destroy, :destroy_image]
 
   def index
     @projects = Project.includes(:category).order(created_at: :desc)
@@ -25,8 +25,13 @@ class Admin::ProjectsController < ApplicationController
   end
 
   def update
-    if @project.update(project_params)
-      redirect_to admin_projects_path,
+    attributes = project_params.except(:images)
+    new_images = project_params[:images]&.reject(&:blank?)
+
+    if @project.update(attributes)
+      @project.images.attach(new_images) if new_images.present?
+
+      redirect_to edit_admin_project_path(@project),
                   notice: "Realizacja została zaktualizowana."
     else
       render :edit, status: :unprocessable_entity
@@ -38,6 +43,15 @@ class Admin::ProjectsController < ApplicationController
 
     redirect_to admin_projects_path,
                 notice: "Realizacja została usunięta.",
+                status: :see_other
+  end
+
+  def destroy_image
+    image = @project.images_attachments.find(params[:image_id])
+    image.purge
+
+    redirect_to edit_admin_project_path(@project),
+                notice: "Zdjęcie zostało usunięte.",
                 status: :see_other
   end
 

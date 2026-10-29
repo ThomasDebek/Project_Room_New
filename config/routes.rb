@@ -12,7 +12,14 @@ Rails.application.routes.draw do
 
   namespace :admin do
     root "dashboard#index"
-    resources :projects
+
+    resources :projects do
+      member do
+        delete "images/:image_id",
+               action: :destroy_image,
+               as: :image
+      end
+    end
   end
 
 
